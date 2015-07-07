@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Json {
 
 	static String jsonInput = "{\"type\":\"dog\",\"name\":\"Spike\",\"values\": [1, 2.5, \"3\"]}";
-	
+
 	static String jsonInput1 = "{\"nome\":\"Spike\",\"con\": [1, 2, 5, \"Juju\", 2.3, \"Anima\"]}";
 
 	public static void main(final String[] args) {
@@ -45,8 +45,7 @@ public class Json {
 			for (Object obj : mula.getValues()) {
 				System.out.println(obj.getClass());
 				if (obj instanceof Integer) {
-					System.out.println(((Integer) obj).toString()
-							+ " is an Integer");
+					System.out.println(((Integer) obj).toString() + " is an Integer");
 				}
 			}
 		} catch (JsonProcessingException e) {
@@ -56,10 +55,10 @@ public class Json {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
 			Conf conf = mapper.readValue(jsonInput1, Json.Conf.class);
-			for (final Con con: conf.getCon()) {
+			for (final Con con : conf.getCon()) {
 				System.out.println(con.toString());
 			}
 		} catch (JsonParseException e) {
@@ -109,20 +108,20 @@ public class Json {
 		public static Con stringMaker(final String st) {
 			return new ConString(st);
 		}
-		
+
 		@JsonCreator
 		public static Con integerMaker(final Integer in) {
 			return new ConInteger(in);
 		}
-		
+
 		@JsonCreator
 		public static Con doubleMaker(final Double in) {
 			return new ConDouble(in);
 		}
-		
+
 		public abstract String toString();
 	}
-	
+
 	private static class ConInteger extends Con {
 		private Integer value;
 
@@ -130,13 +129,13 @@ public class Json {
 			super();
 			this.value = value;
 		}
-		
+
 		@Override
 		public String toString() {
 			return "Integer: " + value;
 		}
 	}
-	
+
 	private static class ConDouble extends Con {
 		private Double value;
 
@@ -144,7 +143,7 @@ public class Json {
 			super();
 			this.value = value;
 		}
-		
+
 		@Override
 		public String toString() {
 			return "Double: " + value;
@@ -158,13 +157,13 @@ public class Json {
 			super();
 			this.value = value;
 		}
-		
+
 		@Override
 		public String toString() {
 			return "String: " + value;
 		}
 	}
-	
+
 	public static class Conf {
 		private String nome;
 		private Con[] con;
